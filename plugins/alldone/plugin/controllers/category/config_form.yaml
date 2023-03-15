@@ -1,0 +1,10 @@
+name: Category
+form: $/alldone/plugin/models/category/fields.yaml
+modelClass: Alldone\Plugin\Models\Category
+defaultRedirect: alldone/plugin/category
+create:
+    redirect: 'alldone/plugin/category/update/:id'
+    redirectClose: alldone/plugin/category
+update:
+    redirect: alldone/plugin/category
+    redirectClose: alldone/plugin/category

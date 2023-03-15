@@ -1,0 +1,11 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table alldone_plugin_categories'
+    - builder_table_create_alldone_plugin_categories.php
+1.0.3:
+    - 'Created table alldone_plugin_products'
+    - builder_table_create_alldone_plugin_products.php
+1.0.4:
+    - 'Created table alldone_plugin_orders'
+    - builder_table_create_alldone_plugin_orders.php

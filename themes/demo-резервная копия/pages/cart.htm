@@ -1,0 +1,74 @@
+url="/cart"
+title="Корзина"
+layout="default"
+==
+    <?php
+        function onStart(){
+            $value = Cookie::get('cart');
+            if($value){
+                $products = json_decode(urldecode($value),true);
+                $products_ids = [];
+                foreach ($products as $key => $product) {
+                $products_ids[] = $product["id"];
+                }
+
+                $this["products"] = Alldone\Plugin\Models\Product::findMany($products_ids);
+            }
+        }
+
+        function onCartClear(){
+            Cookie::queue('cart','',3600);
+             return [
+            '#cart-main' => "Корзина очищена"
+        ];
+        }
+
+        function onCartSended(){
+            Cookie::queue('cart','',3600);
+             return [
+            '#cart-main' => "Заказ отправлен"
+        ];
+        }
+    ?>
+==
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row" id="cart-main">
+            <h1>Корзина</h1>
+            {% for product in products %}
+            <div class="news-block news-block-two-col d-flex mt-4">
+                <div class="news-block-two-col-image-wrap">
+                    <img src="{{ product.picture.path }}" class="news-image img-fluid" alt="">
+                </div>
+
+                <div class="news-block-two-col-info">
+                    <div class="news-block-title mb-2">
+                        <h6><a href="#" class="news-block-title-link">{{ product.name }}</a></h6>
+                    </div>
+
+                    <div class="news-block-date">
+                        <p>
+                            {{ product.price }} &#8381;
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            {% else %}
+                Корзина пуста
+            {% endfor %}
+            
+            {% if products %}
+            <button class="custom-btn btn" data-request="onCartClear" style="margin-top:20px;margin-bottom: 20px;">
+                Очистить корзину
+            </button>
+
+            <button class="custom-btn btn" data-request="onCartSended">
+                Оплатить
+            </button>
+            {% endif %}
+
+        </div>
+    </div>
+</section>

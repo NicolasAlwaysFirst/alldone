@@ -1,0 +1,79 @@
+title = "Профилактика и лечение гриппа и орви"
+url = "/products/profilaktika"
+layout = "default"
+==
+<?php
+    function onStart(){
+        $cookie = Cookie::get('cart');
+        if($cookie) {
+            $this['cart'] = json_decode(urldecode($cookie), true);
+            $cart_ids = [];
+            foreach($this['cart'] as $key=>$cart) {
+                $cart_ids[$cart["id"]] = true;
+            }
+            $this['cart_ids'] = $cart_ids;
+           
+        }
+         $this['products'] = Alldone\Plugin\Models\Product::where("category_id", 1)->get();
+    }
+
+    function onAddToCart(){
+        $cookie = Cookie::get('cart');
+        
+        $arr = json_decode(urldecode($cookie), true);
+
+        $post = post();
+        $arr[] = [
+            "id"=>$post["id"],
+            "name"=>$post["name"],
+            "price"=>$post["price"]
+            ];
+       
+        Cookie::queue('cart', urlencode(json_encode($arr,JSON_UNESCAPED_UNICODE)),3600);
+         return [
+            '#addToCart-' . $post["id"] => "Добавлено в корзину"
+        ];
+    }
+?>
+==
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <h1>Профилактика и лечение гриппа и орви<h1>
+            {% for product in products %}
+            <div class="news-block news-block-two-col d-flex mt-4">
+                <div class="news-block-two-col-image-wrap">
+                    <img src="{{ product.picture.path }}" class="news-image img-fluid" alt="">
+                </div>
+
+                <div class="news-block-two-col-info">
+                    <div class="news-block-title mb-2">
+                        <h6><a href="#" class="news-block-title-link">{{ product.name }}</a></h6>
+                    </div>
+
+                    <div class="news-block-date">
+                        <p>
+                            {{ product.price }} &#8381;
+                        </p>
+                    </div>
+                    {% if not cart_ids[product.id] %}
+                        <button class="custom-btn btn add-to-cart" id="addToCart-{{product.id}}" data-request="onAddToCart" data-request-data="id: {{ product.id}}, name: '{{ product.name}}', price: {{product.price}}">
+                            Добавить в корзину
+                        </button>
+                    {% else %}
+                        <button class="custom-btn btn">
+                            Уже в корзине
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <a href="{{'cart'|page}}">
+                <button class="custom-btn btn">
+                    Перейти в корзину
+                </button>
+            </a>
+
+        </div>
+    </div>
+</section>

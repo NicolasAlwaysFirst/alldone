@@ -1,0 +1,14 @@
+fields:
+    name:
+        label: Имя
+        span: auto
+        type: text
+    phone:
+        label: 'Номер телефона'
+        span: auto
+        type: text
+    text:
+        label: 'Текстовая область'
+        size: large
+        span: full
+        type: textarea

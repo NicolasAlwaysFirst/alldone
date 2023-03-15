@@ -1,0 +1,10 @@
+name: Order
+form: $/alldone/plugin/models/order/fields.yaml
+modelClass: Alldone\Plugin\Models\Order
+defaultRedirect: alldone/plugin/order
+create:
+    redirect: 'alldone/plugin/order/update/:id'
+    redirectClose: alldone/plugin/order
+update:
+    redirect: alldone/plugin/order
+    redirectClose: alldone/plugin/order

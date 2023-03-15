@@ -1,0 +1,10 @@
+name: Product
+form: $/alldone/plugin/models/product/fields.yaml
+modelClass: Alldone\Plugin\Models\Product
+defaultRedirect: alldone/plugin/product
+create:
+    redirect: 'alldone/plugin/product/update/:id'
+    redirectClose: alldone/plugin/product
+update:
+    redirect: alldone/plugin/product
+    redirectClose: alldone/plugin/product

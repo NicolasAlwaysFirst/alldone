@@ -1,0 +1,12 @@
+list: $/alldone/plugin/models/product/columns.yaml
+modelClass: Alldone\Plugin\Models\Product
+title: Product
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'alldone/plugin/product/update/:id'

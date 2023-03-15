@@ -1,0 +1,19 @@
+plugin:
+    name: 'alldone.plugin::lang.plugin.name'
+    description: 'alldone.plugin::lang.plugin.description'
+    author: AllDone
+    icon: wn-icon-adjust
+    replaces: {  }
+navigation:
+    categories:
+        label: Категории
+        url: alldone/plugin/category
+        icon: icon-life-ring
+    products:
+        label: Товары
+        url: alldone/plugin/product
+        icon: icon-life-ring
+    orders:
+        label: 'Заказы по рецепту'
+        url: alldone/plugin/order
+        icon: icon-life-ring
